@@ -3,11 +3,12 @@
 import { useState, useRef } from "react"
 import { useAppContext } from "@/context/AppContext"
 import { Button } from "@/components/ui/button"
-import { Camera, Image, Loader2 } from "lucide-react"
+import { Camera, Loader2, Upload } from "lucide-react"
 
 export default function CameraComponent() {
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const cameraInputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { selectedAllergens, setAnalysisResults } = useAppContext()
 
@@ -21,12 +22,16 @@ export default function CameraComponent() {
   }
 
   const handleCameraClick = () => {
+    cameraInputRef.current?.click()
+  }
+
+  const handleFileClick = () => {
     fileInputRef.current?.click()
   }
 
   const handleAnalyze = async () => {
     if (!imageSrc || selectedAllergens.length === 0) {
-      alert("Please capture an image and select at least one allergen.")
+      alert("Please capture an image or select one from your library, and select at least one allergen.")
       return
     }
 
@@ -60,21 +65,32 @@ export default function CameraComponent() {
 
   return (
     <div className="w-full max-w-md mt-6">
-      <Button onClick={handleCameraClick} className="w-full bg-orange-500 hover:bg-orange-600 text-white mb-4">
-        {imageSrc ? <Image className="mr-2" /> : <Camera className="mr-2" />}
-        {imageSrc ? "Retake Photo" : "Take Photo of Menu"}
-      </Button>
+      <div className="flex justify-between gap-4 mb-4">
+        <Button onClick={handleCameraClick} className="flex-1 bg-orange-500 hover:bg-orange-600 text-white">
+          <Camera className="mr-2" />
+          Take Photo
+        </Button>
+        <Button onClick={handleFileClick} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">
+          <Upload className="mr-2" />
+          Upload Image
+        </Button>
+      </div>
       <input
         type="file"
         accept="image/*"
         capture="environment"
         onChange={handleCapture}
-        ref={fileInputRef}
+        ref={cameraInputRef}
         className="hidden"
       />
+      <input type="file" accept="image/*" onChange={handleCapture} ref={fileInputRef} className="hidden" />
       {imageSrc && (
         <div className="mt-4">
-          <img src={imageSrc || "/placeholder.svg"} alt="Captured menu" className="w-full rounded-lg shadow-md mb-4" />
+          <img
+            src={imageSrc || "/placeholder.svg"}
+            alt="Captured or selected menu"
+            className="w-full rounded-lg shadow-md mb-4"
+          />
           <Button
             onClick={handleAnalyze}
             className="w-full bg-green-500 hover:bg-green-600 text-white"
@@ -94,4 +110,3 @@ export default function CameraComponent() {
     </div>
   )
 }
-
