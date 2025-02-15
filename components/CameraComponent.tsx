@@ -65,47 +65,38 @@ export default function CameraComponent() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="flex justify-between gap-4">
-        <Button onClick={handleCameraClick} className="flex-1 bg-orange-500 hover:bg-orange-600 text-white">
-          <Camera className="mr-2" />
-          Take Photo
-        </Button>
-        <Button onClick={handleFileClick} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white">
+      <div className="flex items-center gap-4">
+        <Button 
+          onClick={handleFileClick} 
+          className="flex-1 bg-blue-500 hover:bg-blue-600 text-white"
+        >
           <Upload className="mr-2" />
           Upload Image
         </Button>
+        {imageSrc && (
+          <img
+            src={imageSrc}
+            alt="Menu thumbnail"
+            className="h-12 w-12 object-cover rounded-lg shadow-md"
+          />
+        )}
       </div>
-      <input
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={handleCapture}
-        ref={cameraInputRef}
-        className="hidden"
-      />
       <input type="file" accept="image/*" onChange={handleCapture} ref={fileInputRef} className="hidden" />
       {imageSrc && (
-        <div className="mt-4">
-          <img
-            src={imageSrc || "/placeholder.svg"}
-            alt="Captured or selected menu"
-            className="w-full rounded-lg shadow-md mb-4"
-          />
-          <Button
-            onClick={handleAnalyze}
-            className="w-full bg-green-500 hover:bg-green-600 text-white"
-            disabled={isAnalyzing}
-          >
-            {isAnalyzing ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Analyzing...
-              </>
-            ) : (
-              "Analyze Menu"
-            )}
-          </Button>
-        </div>
+        <Button
+          onClick={handleAnalyze}
+          className="w-full bg-green-500 hover:bg-green-600 text-white mt-4"
+          disabled={isAnalyzing}
+        >
+          {isAnalyzing ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Analyzing...
+            </>
+          ) : (
+            "Analyze Menu"
+          )}
+        </Button>
       )}
     </div>
   )
