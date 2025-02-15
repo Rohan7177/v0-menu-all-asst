@@ -6,6 +6,9 @@ import { Label } from "@/components/ui/label"
 
 const commonAllergens = [
   "Peanuts",
+  "Cashews",
+  "Pistachios",
+  "Almonds",
   "Tree Nuts",
   "Milk",
   "Eggs",
@@ -13,18 +16,7 @@ const commonAllergens = [
   "Shellfish",
   "Soy",
   "Wheat",
-  "Sesame",
-  "Mustard",
-  "Celery",
-  "Lupin",
-  "Molluscs",
-  "Sulphites",
   "Gluten",
-  "Crustaceans",
-  "Corn",
-  "Gelatin",
-  "Beef",
-  "Chicken",
 ]
 
 export default function AllergenSelection() {
