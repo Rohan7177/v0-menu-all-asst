@@ -64,8 +64,8 @@ export default function CameraComponent() {
   }
 
   return (
-    <div className="w-full max-w-md mt-6">
-      <div className="flex justify-between gap-4 mb-4">
+    <div className="w-full max-w-md">
+      <div className="flex justify-between gap-4">
         <Button onClick={handleCameraClick} className="flex-1 bg-orange-500 hover:bg-orange-600 text-white">
           <Camera className="mr-2" />
           Take Photo

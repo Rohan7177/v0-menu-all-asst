@@ -6,8 +6,8 @@ import AnalysisResults from "@/components/AnalysisResults"
 export default function Home() {
   return (
     <AppProvider>
-      <main className="flex min-h-screen flex-col items-center justify-between p-4 bg-orange-50">
-        <h1 className="text-3xl font-bold text-orange-800 mb-6">Food Allergy Checker</h1>
+      <main className="flex flex-col items-center p-4 bg-orange-50 space-y-4">
+        <h1 className="text-3xl font-bold text-orange-800">Food Allergy Checker</h1>
         <AllergenSelection />
         <CameraComponent />
         <AnalysisResults />
