@@ -3,7 +3,6 @@
 import { useAppContext } from "@/context/AppContext"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { ChevronDown, ChevronUp } from "lucide-react"
 import { useState } from "react"
 
 const commonAllergens = [
@@ -41,13 +40,9 @@ export default function AllergenSelection() {
         <h2 className="text-xl font-semibold text-orange-800">Select Your Allergens</h2>
         <button 
           onClick={toggleExpand}
-          className="p-2 hover:bg-orange-50 rounded-full transition-colors"
+          className="text-sm text-orange-600 hover:text-orange-800 font-medium transition-colors"
         >
-          {isExpanded ? (
-            <ChevronUp className="h-5 w-5 text-orange-800" />
-          ) : (
-            <ChevronDown className="h-5 w-5 text-orange-800" />
-          )}
+          {isExpanded ? "<< Close" : "Cick to select more >>"}
         </button>
       </div>
       <div className="grid grid-cols-2 gap-4">
